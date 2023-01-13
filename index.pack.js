@@ -454,7 +454,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function App() {
-    var _React$useState = _react2.default.useState([{ id: 1, driverName: 'D-Jacob B.', forName: 'Jacob B.', mins: 27, placed: '1:30PM', address: '450 Madison Ave', service: 'logo.png', status: 'preparing' }, { id: 2, driverName: 'D-Mike M.', forName: 'Mike M.', mins: 42, placed: '2:40PM', address: '240 Lexington Ave', service: 'logo.png', status: 'preparing' }, { id: 3, driverName: 'D-Jenny R.', forName: 'Jenny R.', mins: 55, placed: '3:15PM', address: '335 Park Ave', service: 'logo.png', status: 'preparing' }, { id: 4, driverName: 'D-Sam J.', forName: 'Sam J.', mins: 90, placed: '1:45PM', address: '120 Park Ave', service: 'logo.png', status: 'preparing' }, { id: 5, driverName: 'D-Ben L.', forName: 'Ben L.', mins: 30, placed: '2:30PM', address: '218 7th Ave', service: 'logo.png', status: 'preparing' }, { id: 6, driverName: 'D-Jake W.', forName: 'Jake W.', mins: 3, placed: '1:30PM', address: '124 West 57th Street', service: 'logo.png', status: 'ready' }, { id: 7, driverName: 'D-Liz T.', forName: 'Liz T.', mins: 6, placed: '1:30PM', address: '423 West 55th Street', service: 'logo.png', status: 'out' }]),
+    var _React$useState = _react2.default.useState([{ id: 1, driverName: 'D-Jacob B.', forName: 'Jacob B.', mins: 27, placed: '1:30PM', address: '450 Madison Ave', status: 'preparing' }, { id: 2, driverName: 'D-Mike M.', forName: 'Mike M.', mins: 42, placed: '2:40PM', address: '240 Lexington Ave', status: 'preparing' }, { id: 3, driverName: 'D-Jenny R.', forName: 'Jenny R.', mins: 55, placed: '3:15PM', address: '335 Park Ave', status: 'preparing' }, { id: 4, driverName: 'D-Sam J.', forName: 'Sam J.', mins: 28, placed: '1:45PM', address: '120 Park Ave', status: 'preparing' }, { id: 5, driverName: 'D-Ben L.', forName: 'Ben L.', mins: 30, placed: '2:30PM', address: '218 7th Ave', status: 'preparing' }, { id: 6, driverName: 'D-Jake W.', forName: 'Jake W.', mins: 22, placed: '1:30PM', address: '124 West 57th Street', status: 'preparing' }, { id: 7, driverName: 'D-Liz T.', forName: 'Liz T.', mins: 16, placed: '1:30PM', address: '423 West 55th Street', status: 'out' }]),
         _React$useState2 = _slicedToArray(_React$useState, 2),
         orders = _React$useState2[0],
         setOrders = _React$useState2[1];
@@ -551,6 +551,10 @@ var _InTransitOrder = __webpack_require__(10);
 
 var _InTransitOrder2 = _interopRequireDefault(_InTransitOrder);
 
+var _InTransit = __webpack_require__(24);
+
+var _InTransit2 = _interopRequireDefault(_InTransit);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Card(props) {
@@ -610,7 +614,7 @@ function Card(props) {
 
     // Create list of all orders out for delivery
     var isOut = out.map(function (order) {
-        return _react2.default.createElement(_InTransitOrder2.default, {
+        return _react2.default.createElement(_InTransit2.default, {
             btnColor: '#e4e3e5',
             btnFont: '#9e9ea0',
             btnText: btnText,
@@ -668,7 +672,7 @@ function Header() {
         _react2.default.createElement(
             'span',
             null,
-            _react2.default.createElement(_Title2.default, { title: 'Will\'s Restaurant' })
+            _react2.default.createElement(_Title2.default, { title: 'Your Restaurant' })
         ),
         _react2.default.createElement(
             'button',
@@ -707,7 +711,7 @@ function InTransitOrder(props) {
         null,
         _react2.default.createElement(
             'div',
-            { className: 'order' },
+            { className: 'order order--inTransit' },
             _react2.default.createElement('img', { className: 'order--logo', src: 'https://logos-download.com/wp-content/uploads/2019/06/GrubHub_Logo-700x700.png' }),
             _react2.default.createElement(
                 'div',
@@ -716,7 +720,7 @@ function InTransitOrder(props) {
                     'p',
                     { className: 'order--name' },
                     ' ',
-                    props.forName
+                    props.orderName
                 ),
                 _react2.default.createElement(
                     'div',
@@ -34859,6 +34863,99 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = Driver;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Driver(props) {
+    return _react2.default.createElement(
+        'div',
+        { className: 'driver' },
+        _react2.default.createElement(
+            'div',
+            { className: 'driver--name' },
+            _react2.default.createElement(
+                'p',
+                null,
+                ' ',
+                props.driverName
+            ),
+            _react2.default.createElement(
+                'p',
+                null,
+                ' \u2605 \u2605 \u2605 \u2605 \u2605 '
+            )
+        ),
+        _react2.default.createElement(
+            'p',
+            null,
+            ' ',
+            _react2.default.createElement(
+                'em',
+                null,
+                'is ',
+                props.mins,
+                ' minutes away'
+            ),
+            ' '
+        )
+    );
+}
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = InTransit;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Order = __webpack_require__(11);
+
+var _Order2 = _interopRequireDefault(_Order);
+
+var _InTransitOrder = __webpack_require__(10);
+
+var _InTransitOrder2 = _interopRequireDefault(_InTransitOrder);
+
+var _Driver = __webpack_require__(23);
+
+var _Driver2 = _interopRequireDefault(_Driver);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function InTransit(props) {
+
+    return _react2.default.createElement(
+        'div',
+        { className: 'inTransit' },
+        _react2.default.createElement(_Driver2.default, { driverName: 'Will P.', mins: props.mins }),
+        _react2.default.createElement(_InTransitOrder2.default, { miles: props.miles, orderName: props.forName, address: props.address })
+    );
+}
 
 /***/ })
 /******/ ]);

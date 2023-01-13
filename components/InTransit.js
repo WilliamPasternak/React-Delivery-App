@@ -7,9 +7,8 @@ export default function InTransit(props){
   
     return(
         <div className = 'inTransit'> 
-   
             <Driver driverName = 'Will P.' mins ={props.mins} />
-            <InTransitOrder  miles = {props.miles} orderName = {props.driverName} address = {props.address} />
+            <InTransitOrder  miles = {props.miles} orderName = {props.forName} address = {props.address} />
         </div> 
     )
 }

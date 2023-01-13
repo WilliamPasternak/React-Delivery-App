@@ -5,7 +5,7 @@ export default function Header(){
     return(
         <header>
             <Title title = 'App Status '/>
-            <span><Title title = "Will's Restaurant"/></span>
+            <span><Title title = "Your Restaurant"/></span>
             <button className ='header--btn'> New Order </button>
         </header>
     )

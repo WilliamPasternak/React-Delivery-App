@@ -1,6 +1,7 @@
 import React from 'react'
 import Order from './Order'
 import InTransitOrder from './InTransitOrder'
+import InTransit from './InTransit'
 
 
 export default function Card(props){
@@ -58,7 +59,7 @@ else if(props.status === 'out'){
 
     // Create list of all orders out for delivery
         const isOut = out.map(order => 
-                <InTransitOrder 
+                <InTransit 
                     btnColor = '#e4e3e5'
                     btnFont = '#9e9ea0' 
                     btnText = {btnText} 
@@ -76,6 +77,7 @@ else if(props.status === 'out'){
           {props.status === 'preparing' && isPreparing}
           {props.status === 'ready' && isReady}
           {props.status === 'out' && isOut}
+          
         </div>
     )
 }

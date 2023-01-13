@@ -6,13 +6,13 @@ import Card from './components/Card'
 
 export default function App(){ 
     const [orders, setOrders] = React.useState([
-        {id:1, driverName: 'D-Jacob B.', forName: 'Jacob B.', mins: 27, placed: '1:30PM', address: '450 Madison Ave', service: 'logo.png', status: 'preparing' },
-        {id:2, driverName: 'D-Mike M.', forName: 'Mike M.', mins: 42, placed: '2:40PM', address: '240 Lexington Ave', service: 'logo.png', status: 'preparing' },
-        {id:3, driverName: 'D-Jenny R.', forName: 'Jenny R.', mins: 55, placed: '3:15PM', address: '335 Park Ave', service: 'logo.png' , status: 'preparing'},
-        {id:4, driverName: 'D-Sam J.', forName: 'Sam J.',  mins: 90, placed: '1:45PM', address: '120 Park Ave', service: 'logo.png' , status: 'preparing'},
-        {id:5, driverName: 'D-Ben L.', forName: 'Ben L.',  mins: 30, placed: '2:30PM', address: '218 7th Ave', service: 'logo.png' , status: 'preparing'},
-        {id:6, driverName: 'D-Jake W.', forName: 'Jake W.',  mins: 3,  placed: '1:30PM', address: '124 West 57th Street', service: 'logo.png' , status: 'ready' },
-        {id:7, driverName: 'D-Liz T.', forName: 'Liz T.',  mins: 6,  placed: '1:30PM', address: '423 West 55th Street', service: 'logo.png' , status: 'out' },
+        {id:1, driverName: 'D-Jacob B.', forName: 'Jacob B.', mins: 27, placed: '1:30PM', address: '450 Madison Ave',  status: 'preparing' },
+        {id:2, driverName: 'D-Mike M.', forName: 'Mike M.', mins: 42, placed: '2:40PM', address: '240 Lexington Ave', status: 'preparing' },
+        {id:3, driverName: 'D-Jenny R.', forName: 'Jenny R.', mins: 55, placed: '3:15PM', address: '335 Park Ave',  status: 'preparing'},
+        {id:4, driverName: 'D-Sam J.', forName: 'Sam J.',  mins: 28, placed: '1:45PM', address: '120 Park Ave',  status: 'preparing'},
+        {id:5, driverName: 'D-Ben L.', forName: 'Ben L.',  mins: 30, placed: '2:30PM', address: '218 7th Ave', status: 'preparing'},
+        {id:6, driverName: 'D-Jake W.', forName: 'Jake W.',  mins: 22,  placed: '1:30PM', address: '124 West 57th Street', status: 'preparing' },
+        {id:7, driverName: 'D-Liz T.', forName: 'Liz T.',  mins: 16,  placed: '1:30PM', address: '423 West 55th Street', status: 'out' },
     ])
      
     function changeStatus(id){
