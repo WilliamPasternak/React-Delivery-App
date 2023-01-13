@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -74,9 +74,9 @@
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(20);
+  module.exports = __webpack_require__(18);
 } else {
-  module.exports = __webpack_require__(19);
+  module.exports = __webpack_require__(17);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -315,6 +315,462 @@ function Button(props) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(20);
+} else {
+  module.exports = __webpack_require__(19);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
+            (typeof self !== "undefined" && self) ||
+            window;
+var apply = Function.prototype.apply;
+
+// DOM APIs, for completeness
+
+exports.setTimeout = function() {
+  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
+};
+exports.setInterval = function() {
+  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
+};
+exports.clearTimeout =
+exports.clearInterval = function(timeout) {
+  if (timeout) {
+    timeout.close();
+  }
+};
+
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+Timeout.prototype.close = function() {
+  this._clearFn.call(scope, this._id);
+};
+
+// Does not start the time, just sets up the members needed.
+exports.enroll = function(item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
+};
+
+exports.unenroll = function(item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
+};
+
+exports._unrefActive = exports.active = function(item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout)
+        item._onTimeout();
+    }, msecs);
+  }
+};
+
+// setimmediate attaches itself to the global object
+__webpack_require__(21);
+// On some exotic environments, it's not clear which object `setimmediate` was
+// able to install onto.  Search each possibility in the same order as the
+// `setimmediate` library.
+exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+                       (typeof global !== "undefined" && global.setImmediate) ||
+                       (this && this.setImmediate);
+exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+                         (typeof global !== "undefined" && global.clearImmediate) ||
+                         (this && this.clearImmediate);
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+exports.default = App;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Header = __webpack_require__(9);
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _Card = __webpack_require__(8);
+
+var _Card2 = _interopRequireDefault(_Card);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function App() {
+    var _React$useState = _react2.default.useState([{ id: 1, driverName: 'D-Jacob B.', forName: 'Jacob B.', mins: 27, placed: '1:30PM', address: '450 Madison Ave', service: 'logo.png', status: 'preparing' }, { id: 2, driverName: 'D-Mike M.', forName: 'Mike M.', mins: 42, placed: '2:40PM', address: '240 Lexington Ave', service: 'logo.png', status: 'preparing' }, { id: 3, driverName: 'D-Jenny R.', forName: 'Jenny R.', mins: 55, placed: '3:15PM', address: '335 Park Ave', service: 'logo.png', status: 'preparing' }, { id: 4, driverName: 'D-Sam J.', forName: 'Sam J.', mins: 90, placed: '1:45PM', address: '120 Park Ave', service: 'logo.png', status: 'preparing' }, { id: 5, driverName: 'D-Ben L.', forName: 'Ben L.', mins: 30, placed: '2:30PM', address: '218 7th Ave', service: 'logo.png', status: 'preparing' }, { id: 6, driverName: 'D-Jake W.', forName: 'Jake W.', mins: 3, placed: '1:30PM', address: '124 West 57th Street', service: 'logo.png', status: 'ready' }, { id: 7, driverName: 'D-Liz T.', forName: 'Liz T.', mins: 6, placed: '1:30PM', address: '423 West 55th Street', service: 'logo.png', status: 'out' }]),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        orders = _React$useState2[0],
+        setOrders = _React$useState2[1];
+
+    function changeStatus(id) {
+        var currentOrder = orders.filter(function (order) {
+            return order.id === id;
+        });
+        currentOrder[0].status = '' + (currentOrder[0].status === 'preparing' ? 'ready' : 'preparing');
+        setOrders(function (prevValue) {
+            return [].concat(_toConsumableArray(prevValue));
+        }, currentOrder[0]);
+    }
+
+    // Filter orders into their respective types
+    var preparing = orders.filter(function (order) {
+        return order.status === 'preparing';
+    });
+    var ready = orders.filter(function (order) {
+        return order.status === 'ready';
+    });
+    var out = orders.filter(function (order) {
+        return order.status === 'out';
+    });
+
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_Header2.default, null),
+        _react2.default.createElement(
+            'main',
+            null,
+            _react2.default.createElement(_Card2.default, { title: 'Preparing Order (' + preparing.length + ')', color: '#fa9802', orders: orders, status: 'preparing', changeStatus: changeStatus }),
+            _react2.default.createElement(_Card2.default, { title: 'Ready for Delivery (' + ready.length + ')', color: '#008a00', orders: orders, status: 'ready', changeStatus: changeStatus }),
+            _react2.default.createElement(_Card2.default, { title: 'Out for Delivery (' + out.length + ')', color: '#1e5bd1', orders: orders, status: 'out', changeStatus: changeStatus })
+        )
+    );
+}
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var m = __webpack_require__(16);
+if (process.env.NODE_ENV === 'production') {
+  exports.createRoot = m.createRoot;
+  exports.hydrateRoot = m.hydrateRoot;
+} else {
+  var i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+  exports.createRoot = function(c, o) {
+    i.usingClientEntryPoint = true;
+    try {
+      return m.createRoot(c, o);
+    } finally {
+      i.usingClientEntryPoint = false;
+    }
+  };
+  exports.hydrateRoot = function(c, h, o) {
+    i.usingClientEntryPoint = true;
+    try {
+      return m.hydrateRoot(c, h, o);
+    } finally {
+      i.usingClientEntryPoint = false;
+    }
+  };
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = Card;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Order = __webpack_require__(11);
+
+var _Order2 = _interopRequireDefault(_Order);
+
+var _InTransitOrder = __webpack_require__(10);
+
+var _InTransitOrder2 = _interopRequireDefault(_InTransitOrder);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Card(props) {
+
+    // Filter orders into their respective types
+    var preparing = props.orders.filter(function (order) {
+        return order.status === 'preparing';
+    }); // Array of orders marked 'preparing'
+    var ready = props.orders.filter(function (order) {
+        return order.status === 'ready';
+    });
+    var out = props.orders.filter(function (order) {
+        return order.status === 'out';
+    });
+
+    // Sets Button Text
+    var btnText = "";
+    if (props.status === 'preparing') {
+        btnText = 'Mark Ready';
+    } else if (props.status === 'ready') {
+        btnText = 'Send Back';
+    } else if (props.status === 'out') {
+        btnText = 'Being Delivered';
+    }
+
+    // Create list of all orders being prepared
+    var isPreparing = preparing.map(function (order) {
+        return _react2.default.createElement(_Order2.default, {
+            btnColor: '#008a00',
+            btnFont: '#fff',
+            btnText: btnText,
+            forName: order.forName,
+            mins: order.mins,
+            placed: order.placed,
+            address: order.address,
+            id: order.id,
+            changeStatus: props.changeStatus
+        });
+    });
+
+    // Create list of all orders marked as ready
+    var isReady = ready.map(function (order) {
+        return _react2.default.createElement(_Order2.default, {
+            btnColor: '#e4e3e5',
+            btnFont: '#000',
+            btnText: btnText,
+            key: order.id,
+            forName: order.forName,
+            mins: order.mins,
+            placed: order.placed,
+            address: order.address,
+            id: order.id,
+            changeStatus: props.changeStatus
+
+        });
+    });
+
+    // Create list of all orders out for delivery
+    var isOut = out.map(function (order) {
+        return _react2.default.createElement(_InTransitOrder2.default, {
+            btnColor: '#e4e3e5',
+            btnFont: '#9e9ea0',
+            btnText: btnText,
+            miles: 0.24,
+            key: order.id,
+            forName: order.forName,
+            driverName: order.driverName,
+            placed: order.placed,
+            address: order.address });
+    });
+
+    return _react2.default.createElement(
+        'div',
+        { className: 'card' },
+        _react2.default.createElement(
+            'h1',
+            { style: { backgroundColor: props.color } },
+            ' ',
+            props.title,
+            ' '
+        ),
+        props.status === 'preparing' && isPreparing,
+        props.status === 'ready' && isReady,
+        props.status === 'out' && isOut
+    );
+}
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = Header;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Title = __webpack_require__(12);
+
+var _Title2 = _interopRequireDefault(_Title);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Header() {
+    return _react2.default.createElement(
+        'header',
+        null,
+        _react2.default.createElement(_Title2.default, { title: 'App Status ' }),
+        _react2.default.createElement(
+            'span',
+            null,
+            _react2.default.createElement(_Title2.default, { title: 'Will\'s Restaurant' })
+        ),
+        _react2.default.createElement(
+            'button',
+            { className: 'header--btn' },
+            ' New Order '
+        )
+    );
+}
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = InTransitOrder;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Button = __webpack_require__(2);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function InTransitOrder(props) {
+
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            'div',
+            { className: 'order' },
+            _react2.default.createElement('img', { className: 'order--logo', src: 'https://logos-download.com/wp-content/uploads/2019/06/GrubHub_Logo-700x700.png' }),
+            _react2.default.createElement(
+                'div',
+                { className: 'order--left' },
+                _react2.default.createElement(
+                    'p',
+                    { className: 'order--name' },
+                    ' ',
+                    props.forName
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'mins--container' },
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'order--mins' },
+                        ' ',
+                        props.miles,
+                        ' '
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'order--until' },
+                        ' mi away '
+                    )
+                )
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'order--center' },
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    props.address
+                )
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'order--right' },
+                _react2.default.createElement(_Button2.default, {
+                    text: 'Being Delivered',
+                    backgroundColor: props.btnColor,
+                    color: props.btnFont }),
+                _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    ' ',
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        ' Support '
+                    )
+                )
+            )
+        )
+    );
+}
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -408,465 +864,7 @@ function Order(props) {
 }
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(22);
-} else {
-  module.exports = __webpack_require__(21);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
-            (typeof self !== "undefined" && self) ||
-            window;
-var apply = Function.prototype.apply;
-
-// DOM APIs, for completeness
-
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) {
-  if (timeout) {
-    timeout.close();
-  }
-};
-
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(scope, this._id);
-};
-
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// setimmediate attaches itself to the global object
-__webpack_require__(23);
-// On some exotic environments, it's not clear which object `setimmediate` was
-// able to install onto.  Search each possibility in the same order as the
-// `setimmediate` library.
-exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
-                       (typeof global !== "undefined" && global.setImmediate) ||
-                       (this && this.setImmediate);
-exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
-                         (typeof global !== "undefined" && global.clearImmediate) ||
-                         (this && this.clearImmediate);
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-exports.default = App;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Header = __webpack_require__(11);
-
-var _Header2 = _interopRequireDefault(_Header);
-
-var _Card = __webpack_require__(9);
-
-var _Card2 = _interopRequireDefault(_Card);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function App() {
-    var _React$useState = _react2.default.useState([{ id: 1, driverName: 'D-Jacob B.', forName: 'Jacob B.', mins: 27, placed: '1:30PM', address: '450 Madison Ave', service: 'logo.png', status: 'preparing' }, { id: 2, driverName: 'D-Mike M.', forName: 'Mike M.', mins: 42, placed: '2:40PM', address: '240 Lexington Ave', service: 'logo.png', status: 'preparing' }, { id: 3, driverName: 'D-Jenny R.', forName: 'Jenny R.', mins: 55, placed: '3:15PM', address: '335 Park Ave', service: 'logo.png', status: 'preparing' }, { id: 4, driverName: 'D-Sam J.', forName: 'Sam J.', mins: 90, placed: '1:45PM', address: '120 Park Ave', service: 'logo.png', status: 'preparing' }, { id: 5, driverName: 'D-Ben L.', forName: 'Ben L.', mins: 30, placed: '2:30PM', address: '218 7th Ave', service: 'logo.png', status: 'preparing' }, { id: 6, driverName: 'D-Jake W.', forName: 'Jake W.', mins: 3, placed: '1:30PM', address: '124 West 57th Street', service: 'logo.png', status: 'ready' }, { id: 7, driverName: 'D-Liz T.', forName: 'Liz T.', mins: 6, placed: '1:30PM', address: '423 West 55th Street', service: 'logo.png', status: 'out' }]),
-        _React$useState2 = _slicedToArray(_React$useState, 2),
-        orders = _React$useState2[0],
-        setOrders = _React$useState2[1];
-
-    function changeStatus(id) {
-        var currentOrder = orders.filter(function (order) {
-            return order.id === id;
-        });
-        currentOrder[0].status = '' + (currentOrder[0].status === 'preparing' ? 'ready' : 'preparing');
-        setOrders(function (prevValue) {
-            return [].concat(_toConsumableArray(prevValue));
-        }, currentOrder[0]);
-    }
-
-    // Filter orders into their respective types
-    var preparing = orders.filter(function (order) {
-        return order.status === 'preparing';
-    });
-    var ready = orders.filter(function (order) {
-        return order.status === 'ready';
-    });
-    var out = orders.filter(function (order) {
-        return order.status === 'out';
-    });
-
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_Header2.default, null),
-        _react2.default.createElement(
-            'main',
-            null,
-            _react2.default.createElement(_Card2.default, { title: 'Preparing Order (' + preparing.length + ')', color: '#fa9802', orders: orders, status: 'preparing', changeStatus: changeStatus }),
-            _react2.default.createElement(_Card2.default, { title: 'Ready for Delivery (' + ready.length + ')', color: '#008a00', orders: orders, status: 'ready', changeStatus: changeStatus }),
-            _react2.default.createElement(_Card2.default, { title: 'Out for Delivery (' + out.length + ')', color: '#1e5bd1', orders: orders, status: 'out', changeStatus: changeStatus })
-        )
-    );
-}
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var m = __webpack_require__(18);
-if (process.env.NODE_ENV === 'production') {
-  exports.createRoot = m.createRoot;
-  exports.hydrateRoot = m.hydrateRoot;
-} else {
-  var i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-  exports.createRoot = function(c, o) {
-    i.usingClientEntryPoint = true;
-    try {
-      return m.createRoot(c, o);
-    } finally {
-      i.usingClientEntryPoint = false;
-    }
-  };
-  exports.hydrateRoot = function(c, h, o) {
-    i.usingClientEntryPoint = true;
-    try {
-      return m.hydrateRoot(c, h, o);
-    } finally {
-      i.usingClientEntryPoint = false;
-    }
-  };
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = Card;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Order = __webpack_require__(3);
-
-var _Order2 = _interopRequireDefault(_Order);
-
-var _InTransitOrder = __webpack_require__(13);
-
-var _InTransitOrder2 = _interopRequireDefault(_InTransitOrder);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Card(props) {
-
-    // Filter orders into their respective types
-    var preparing = props.orders.filter(function (order) {
-        return order.status === 'preparing';
-    }); // Array of orders marked 'preparing'
-    var ready = props.orders.filter(function (order) {
-        return order.status === 'ready';
-    });
-    var out = props.orders.filter(function (order) {
-        return order.status === 'out';
-    });
-
-    // Sets Button Text
-    var btnText = "";
-    if (props.status === 'preparing') {
-        btnText = 'Mark Ready';
-    } else if (props.status === 'ready') {
-        btnText = 'Send Back';
-    } else if (props.status === 'out') {
-        btnText = 'Being Delivered';
-    }
-
-    // Create list of all orders being prepared
-    var isPreparing = preparing.map(function (order) {
-        return _react2.default.createElement(_Order2.default, {
-            btnColor: '#008a00',
-            btnFont: '#fff',
-            btnText: btnText,
-            forName: order.forName,
-            mins: order.mins,
-            placed: order.placed,
-            address: order.address,
-            id: order.id,
-            changeStatus: props.changeStatus
-        });
-    });
-
-    // Create list of all orders marked as ready
-    var isReady = ready.map(function (order) {
-        return _react2.default.createElement(_Order2.default, {
-            btnColor: '#e4e3e5',
-            btnFont: '#000',
-            btnText: btnText,
-            key: order.id,
-            forName: order.forName,
-            mins: order.mins,
-            placed: order.placed,
-            address: order.address,
-            id: order.id,
-            changeStatus: props.changeStatus
-
-        });
-    });
-
-    // Create list of all orders out for delivery
-    var isOut = out.map(function (order) {
-        return _react2.default.createElement(_InTransitOrder2.default, {
-            btnColor: '#e4e3e5',
-            btnFont: '#9e9ea0',
-            btnText: btnText,
-            miles: 0.24,
-            key: order.id,
-            forName: order.forName,
-            driverName: order.driverName,
-            placed: order.placed,
-            address: order.address });
-    });
-
-    return _react2.default.createElement(
-        'div',
-        { className: 'card' },
-        _react2.default.createElement(
-            'h1',
-            { style: { backgroundColor: props.color } },
-            ' ',
-            props.title,
-            ' '
-        ),
-        props.status === 'preparing' && isPreparing,
-        props.status === 'ready' && isReady,
-        props.status === 'out' && isOut
-    );
-}
-
-/***/ }),
-/* 10 */,
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = Header;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Title = __webpack_require__(14);
-
-var _Title2 = _interopRequireDefault(_Title);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Header() {
-    return _react2.default.createElement(
-        'header',
-        null,
-        _react2.default.createElement(_Title2.default, { title: 'App Status ' }),
-        _react2.default.createElement(
-            'span',
-            null,
-            _react2.default.createElement(_Title2.default, { title: 'Will\'s Restaurant' })
-        ),
-        _react2.default.createElement(
-            'button',
-            { className: 'header--btn' },
-            ' New Order '
-        )
-    );
-}
-
-/***/ }),
-/* 12 */,
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = InTransitOrder;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Button = __webpack_require__(2);
-
-var _Button2 = _interopRequireDefault(_Button);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function InTransitOrder(props) {
-
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-            'div',
-            { className: 'order' },
-            _react2.default.createElement('img', { className: 'order--logo', src: 'https://logos-download.com/wp-content/uploads/2019/06/GrubHub_Logo-700x700.png' }),
-            _react2.default.createElement(
-                'div',
-                { className: 'order--left' },
-                _react2.default.createElement(
-                    'p',
-                    { className: 'order--name' },
-                    ' ',
-                    props.forName
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'mins--container' },
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'order--mins' },
-                        ' ',
-                        props.miles,
-                        ' '
-                    ),
-                    _react2.default.createElement(
-                        'span',
-                        { className: 'order--until' },
-                        ' mi away '
-                    )
-                )
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'order--center' },
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    props.address
-                )
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'order--right' },
-                _react2.default.createElement(_Button2.default, {
-                    text: 'Being Delivered',
-                    backgroundColor: props.btnColor,
-                    color: props.btnFont }),
-                _react2.default.createElement(
-                    'a',
-                    { href: '#' },
-                    ' ',
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        ' Support '
-                    )
-                )
-            )
-        )
-    );
-}
-
-/***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -917,7 +915,7 @@ function Title(props) {
 }
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -927,11 +925,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _client = __webpack_require__(8);
+var _client = __webpack_require__(7);
 
 var _client2 = _interopRequireDefault(_client);
 
-var _App = __webpack_require__(7);
+var _App = __webpack_require__(6);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -941,7 +939,7 @@ var root = _client2.default.createRoot(document.getElementById('root'));
 root.render(_react2.default.createElement(_App2.default, null));
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -971,7 +969,7 @@ if (
   __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
 }
           var React = __webpack_require__(0);
-var Scheduler = __webpack_require__(4);
+var Scheduler = __webpack_require__(3);
 
 var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
 
@@ -30817,7 +30815,7 @@ if (
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 17 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30833,7 +30831,7 @@ if (
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(0),ca=__webpack_require__(4);function p(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}var da=new Set,ea={};function fa(a,b){ha(a,b);ha(a+"Capture",b)}
+var aa=__webpack_require__(0),ca=__webpack_require__(3);function p(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return"Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}var da=new Set,ea={};function fa(a,b){ha(a,b);ha(a+"Capture",b)}
 function ha(a,b){ea[a]=b;for(a=0;a<b.length;a++)da.add(b[a])}
 var ia=!("undefined"===typeof window||"undefined"===typeof window.document||"undefined"===typeof window.document.createElement),ja=Object.prototype.hasOwnProperty,ka=/^[:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD][:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD\-.0-9\u00B7\u0300-\u036F\u203F-\u2040]*$/,la=
 {},ma={};function oa(a){if(ja.call(ma,a))return!0;if(ja.call(la,a))return!1;if(ka.test(a))return ma[a]=!0;la[a]=!0;return!1}function pa(a,b,c,d){if(null!==c&&0===c.type)return!1;switch(typeof b){case "function":case "symbol":return!0;case "boolean":if(d)return!1;if(null!==c)return!c.acceptsBooleans;a=a.toLowerCase().slice(0,5);return"data-"!==a&&"aria-"!==a;default:return!1}}
@@ -31147,7 +31145,7 @@ exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!pl(c))throw Er
 
 
 /***/ }),
-/* 18 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31185,15 +31183,15 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(17);
+  module.exports = __webpack_require__(15);
 } else {
-  module.exports = __webpack_require__(16);
+  module.exports = __webpack_require__(14);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 19 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33937,10 +33935,10 @@ if (
   })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(24)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(22)(module)))
 
 /***/ }),
-/* 20 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33973,7 +33971,7 @@ exports.useTransition=function(){return U.current.useTransition()};exports.versi
 
 
 /***/ }),
-/* 21 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34612,10 +34610,10 @@ if (
   })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(5).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(4).setImmediate))
 
 /***/ }),
-/* 22 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34639,10 +34637,10 @@ exports.unstable_requestPaint=function(){};exports.unstable_runWithPriority=func
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();"object"===typeof c&&null!==c?(c=c.delay,c="number"===typeof c&&0<c?d+c:d):c=d;switch(a){case 1:var e=-1;break;case 2:e=250;break;case 5:e=1073741823;break;case 4:e=1E4;break;default:e=5E3}e=c+e;a={id:u++,callback:b,priorityLevel:a,startTime:c,expirationTime:e,sortIndex:-1};c>d?(a.sortIndex=c,f(t,a),null===h(r)&&a===h(t)&&(B?(E(L),L=-1):B=!0,K(H,c-d))):(a.sortIndex=e,f(r,a),A||z||(A=!0,I(J)));return a};
 exports.unstable_shouldYield=M;exports.unstable_wrapCallback=function(a){var b=y;return function(){var c=y;y=b;try{return a.apply(this,arguments)}finally{y=c}}};
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4).setImmediate))
 
 /***/ }),
-/* 23 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -34832,10 +34830,10 @@ exports.unstable_shouldYield=M;exports.unstable_wrapCallback=function(a){var b=y
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(1)))
 
 /***/ }),
-/* 24 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
