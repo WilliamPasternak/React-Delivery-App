@@ -6,7 +6,7 @@ export default function Order(props){
     return(
         <div className ='delivery'>
             <div className = 'order'>
-            <img className ='order--logo' src = 'https://logos-download.com/wp-content/uploads/2019/06/GrubHub_Logo-700x700.png'/>
+            <img className ='order--logo' src = 'https://149346410.v2.pressablecdn.com/wp-content/uploads/2014/09/Postmates-Logo-Black-500x500.png'/>
                 <div className = 'order--left'>
                     <p className='order--name'> {props.forName}</p>
                     <div className = 'mins--container'> 

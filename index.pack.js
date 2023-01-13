@@ -800,7 +800,7 @@ function Order(props) {
         _react2.default.createElement(
             'div',
             { className: 'order' },
-            _react2.default.createElement('img', { className: 'order--logo', src: 'https://logos-download.com/wp-content/uploads/2019/06/GrubHub_Logo-700x700.png' }),
+            _react2.default.createElement('img', { className: 'order--logo', src: 'https://149346410.v2.pressablecdn.com/wp-content/uploads/2014/09/Postmates-Logo-Black-500x500.png' }),
             _react2.default.createElement(
                 'div',
                 { className: 'order--left' },
