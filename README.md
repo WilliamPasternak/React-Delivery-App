@@ -1,28 +1,45 @@
-# co0254f8e941de4503255fb58
+# Delivery Order Tracker
+With this web app, restaurants will be able to monitor their delivery orders from different services all in one place. Restaurants are normally forced to use individual tablets for each delivery service or swipe between different apps on the same screen which can lead to orders being missed.
 
-Quick start:
+**Link to project:** ()
 
-```
-$ yarn # npm install
-$ yarn build # npm run build
-````
+![alt tag]()
 
-## Development
+## How It's Made:
 
-Run Webpack in watch-mode to continually compile the JavaScript as you work:
+**Tech used:** React, Javascript, HTML, CSS
 
-```
-$ yarn watch # npm run watch
-```
+## Optimizations
 
-## About Scrimba
+* Finish implementation of sending messages to Customers or Drivers 
+* Add ability to manually add a new order.
+* Add different delivery logos -- use image from All Logos.jpg
+* Remove unused/old CSS
+* Clean Up code and refactor 
 
-At Scrimba our goal is to create the best possible coding school at the cost of a gym membership! 💜
-If we succeed with this, it will give anyone who wants to become a software developer a realistic shot at succeeding, regardless of where they live and the size of their wallets 🎉
-The Frontend Developer Career Path aims to teach you everything you need to become a Junior Developer, or you could take a deep-dive with one of our advanced courses 🚀
-
-- [Our courses](https://scrimba.com/allcourses)
-- [The Frontend Career Path](https://scrimba.com/learn/frontend)
-- [Become a Scrimba Pro member](https://scrimba.com/pricing)
-
-Happy Coding!
+## More Projects
+<table bordercolor="#66b2b2">
+  <tr>
+    <td width="33.3%"  style="align:center;" valign="top">
+<a target="_blank" href="https://github.com/WilliamPasternak/busboy">Busboy</a>
+        <br />
+      <a target="_blank" href="https://github.com/WilliamPasternak/busboy">
+            <img src="https://github.com/WilliamPasternak/busboy/blob/main/busyboy.gif" width="100%"  alt="Busbo.co"/>
+        </a>
+    </td>
+    <td width="33.3%" valign="top">
+<a target="_blank" href="https://github.com/WilliamPasternak/Dilution-Calculator">Dilution Calculator</a> 
+      <br />
+        <a target="_blank" href="https://github.com/WilliamPasternak/Dilution-Calculator">
+          <img src="https://github.com/WilliamPasternak/Dilution-Calculator/raw/main/Dilution.gif" width="100%" alt="Matching Card Game"/>
+        </a>
+    </td>
+    <td width="33.3%" valign="top">
+<a target="_blank" href="https://github.com/WilliamPasternak/bread">bread</a>
+        <br />
+        <a target="_blank" href="https://github.com/WilliamPasternak/bread">
+          <img src="https://github.com/WilliamPasternak/bread/raw/main/bread.gif" width="100%" alt="Portfolio"/>
+        </a>
+    </td>
+  </tr>
+</table>
