@@ -1,4 +1,4 @@
-# Delivery Order Tracker
+# Delivery Order Dashboard
 With this web app, restaurants will be able to monitor their delivery orders from different services all in one place. Restaurants are normally forced to use individual tablets for each delivery service or swipe between different apps on the same screen which can lead to orders being missed.
 
 **Link to project:** (Coming Soon!)
